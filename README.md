@@ -17,8 +17,8 @@ from simplebatchp import SimpleBatchP
 import numpy as np
 from sklearn.linear_model import LinearRegression
 
-x = [[0],[1],[2],[3],[4],[5],[6],[7],[8],[9]]
-y = [2,4,6,8,10,12,14,16,18,20]
+x = np.array([[0],[1],[2],[3],[4],[5],[6],[7],[8],[9]], dtype=int)
+y = np.array([2,4,6,8,10,12,14,16,18,20], dtype=int)
 
 regressor = LinearRegression()
 
