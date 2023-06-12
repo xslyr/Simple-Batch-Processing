@@ -16,7 +16,7 @@ class SimpleBatchP:
         self.model = model
         self.x = x
         self.y = y
-        self.length = len(x.shape[0])
+        self.length = x.shape[0]
 
 
     def do_sliced_task(self, blocks_of_execution=2, model_params={}):
@@ -44,13 +44,3 @@ class SimpleBatchP:
         return self.model
 
     
-
-
-
-    # ESTUDAR MELHORIA:
-    #
-    # Com C consiguimos manusear melhor a alocação de memória
-    # Será possivel medir o tamanho e a porcentagem que a nossa 
-    # execução ocupará para que ... de forma iterativa sugerirmos
-    # uma quantidade de blocks_of_execution mais conveniente ?
-    # 
