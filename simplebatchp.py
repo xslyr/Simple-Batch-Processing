@@ -16,8 +16,7 @@ class SimpleBatchP:
         self.model = model
         self.x = x
         self.y = y
-        if isinstance(x, pd.DataFrame): self.length = len(x.shape[0])
-        elif isinstance(x, np.array): self.length = len(x.shape[0])
+        self.length = len(x.shape[0])
 
 
     def do_sliced_task(self, blocks_of_execution=2, model_params={}):
@@ -28,8 +27,8 @@ class SimpleBatchP:
             try:
                 if (i+1)*batch_size > self.length: raise Exception
                 if self.y is not None:    
-                    self.model(self.x[ i*batch_size:(i+1)*batch_size,:],
-                               self.y[ i*batch_size:(i+1)*batch_size,:],
+                    self.model(self.x[i*batch_size:(i+1)*batch_size,:],
+                               self.y[i*batch_size:(i+1)*batch_size],
                                **model_params)
                 else:
                     self.model(self.x[ i*batch_size:(i+1)*batch_size,:],**model_params)
@@ -37,11 +36,12 @@ class SimpleBatchP:
             except Exception as e:
                 if self.y is not None:
                     self.model(self.x[i*batch_size:self.length,:],
-                               self.y[i*batch_size:self.length,:],
+                               self.y[i*batch_size:self.length],
                                **model_params)
                 else:
-                    self.model(self.x[i*batch_size:self.length,:],**model_params)
-
+                    self.model(self.x[i*batch_size:self.length],**model_params)
+        
+        return self.model
 
     
 
